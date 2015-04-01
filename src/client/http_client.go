@@ -8,6 +8,7 @@ import (
     "net/url"
     "strings"
     "encoding/json"
+	//"github.com/shxsun/go-sh"
 )
 type RequestData struct
 {
@@ -46,10 +47,11 @@ func httpPost() {
                 //post_data:=RequestData{Version:"1.0",ServerIP:"192.168.1.117",Port:4243,Method:"container/remove",Params:"{\"id\":\"3fb5c4080f37\"}"}
                 //post_data:=RequestData{Version:"1.0",ServerIP:"192.168.1.117",Port:4243,Method:"container/kill",Params:"{\"id\":\"ad7be2d3c897\"}"}
                 //post_data:=RequestData{Version:"1.0",ServerIP:"192.168.1.117",Port:4243,Method:"container/create",Params:""}
-                post_data:=RequestData{Version:"1.0",ServerIP:"192.168.1.117",Port:4243,Method:"image/list",Params:""}
+                //post_data:=RequestData{Version:"1.0",ServerIP:"192.168.1.117",Port:4243,Method:"image/list",Params:""}
+                post_data:=RequestData{Version:"1.0",ServerIP:"117.78.19.76",Port:4243,Method:"fig/ps",Params:"{\"fig_directory\":\"/home/tomzhao/fig/test\"}"}
                 strPostData, _ := json.Marshal(post_data)
                 strTemp:="request="+string(strPostData)
-	resp, err := http.Post("http://127.0.0.1:8080/v1/image/list",
+	resp, err := http.Post("http://127.0.0.1:8080/v1/fig/ps",
 		"application/x-www-form-urlencoded",strings.NewReader(strTemp))
 		//"application/json",strings.NewReader(strTemp))
 	if err != nil {
@@ -107,6 +109,10 @@ func httpDo() {
 }
 //
 func main() {
+	//out, err := sh.Command("echo", "hello").Output()
+	//fmt.Println(string(out), err)
+	//return
+
 //httpGet()
 httpPost()
 //httpPostForm()
